@@ -7,8 +7,8 @@ export const eventsService = {
       .from('events')
       .select(`
         *,
-        creator:profiles!events_created_by_fkey(id, full_name, avatar_url),
-        group:groups!events_group_id_fkey(id, name, category)
+        creator:profiles(id, full_name, avatar_url),
+        group:groups(id, name, category)
       `)
       .eq('group_id', groupId)
       .neq('status', 'draft')
@@ -22,8 +22,8 @@ export const eventsService = {
       .from('events')
       .select(`
         *,
-        creator:profiles!events_created_by_fkey(id, full_name, avatar_url),
-        group:groups!events_group_id_fkey(id, name, category)
+        creator:profiles(id, full_name, avatar_url),
+        group:groups(id, name, category)
       `)
       .eq('status', 'published')
       .gte('start_time', new Date().toISOString())
@@ -38,8 +38,8 @@ export const eventsService = {
       .from('events')
       .select(`
         *,
-        creator:profiles!events_created_by_fkey(id, full_name, avatar_url),
-        group:groups!events_group_id_fkey(id, name, category)
+        creator:profiles(id, full_name, avatar_url),
+        group:groups(id, name, category)
       `)
       .eq('id', eventId)
       .single();
@@ -98,8 +98,8 @@ export const eventsService = {
       .from('events')
       .select(`
         *,
-        creator:profiles!events_created_by_fkey(id, full_name, avatar_url),
-        group:groups!events_group_id_fkey(id, name, category)
+        creator:profiles(id, full_name, avatar_url),
+        group:groups(id, name, category)
       `)
       .eq('status', 'published');
 
@@ -134,7 +134,7 @@ export const eventsService = {
       .from('events')
       .select(`
         *,
-        group:groups!events_group_id_fkey(id, name, category)
+        group:groups(id, name, category)
       `)
       .eq('status', 'published')
       .gte('start_time', startDate)

@@ -58,6 +58,8 @@ This will execute:
 - `003_create_events.sql` - Events
 - `004_create_signups.sql` - Event signups
 - `005_create_notifications.sql` - Notifications system
+- `006_fix_groups_invite_code_default.sql` - Fix invite_code default
+- `007_reload_postgrest_schema.sql` - Reload PostgREST schema cache
 
 ### Step 5: Set Up Resend API Key Secret
 
@@ -183,6 +185,21 @@ npx supabase migration new migration_name
 ### Database migration errors
 - Check migration files for SQL errors
 - Verify you have proper database permissions
+
+### 500 Internal Server Error on groups/events API calls
+If you see 500 errors when loading groups, events, or creating groups:
+
+1. **Reload PostgREST schema cache**: In Supabase Dashboard → SQL Editor, run:
+   ```sql
+   NOTIFY pgrst, 'reload schema';
+   ```
+
+2. **Ensure migrations 006 and 007 are applied**:
+   ```cmd
+   npx supabase db push
+   ```
+
+3. **Check Supabase logs**: Dashboard → Logs → API to see the actual error message
 
 ## 📞 Support
 

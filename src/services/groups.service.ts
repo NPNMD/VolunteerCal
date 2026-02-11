@@ -26,7 +26,7 @@ export const groupsService = {
       .select(`
         *,
         group_members!inner(user_id),
-        creator:profiles!groups_created_by_fkey(id, full_name, avatar_url)
+        creator:profiles(id, full_name, avatar_url)
       `)
       .eq('group_members.user_id', userId);
     if (error) throw error;
@@ -38,7 +38,7 @@ export const groupsService = {
       .from('groups')
       .select(`
         *,
-        creator:profiles!groups_created_by_fkey(id, full_name, avatar_url)
+        creator:profiles(id, full_name, avatar_url)
       `)
       .eq('visibility', 'public')
       .order('created_at', { ascending: false });
@@ -51,7 +51,7 @@ export const groupsService = {
       .from('groups')
       .select(`
         *,
-        creator:profiles!groups_created_by_fkey(id, full_name, avatar_url)
+        creator:profiles(id, full_name, avatar_url)
       `)
       .eq('id', groupId)
       .single();
