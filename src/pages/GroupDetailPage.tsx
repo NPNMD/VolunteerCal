@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { Plus, Share2, LogOut } from 'lucide-react';
+import { Plus, Share2, LogOut, Trash2 } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
 import { useGroups } from '@/hooks/useGroups';
 import { useEvents } from '@/hooks/useEvents';
@@ -12,7 +12,7 @@ export function GroupDetailPage() {
   const { id } = useParams<{ id: string }>();
   const { user } = useAuth();
   const navigate = useNavigate();
-  const { currentGroup, members, fetchGroup, fetchMembers, leaveGroup, joinGroup } = useGroups();
+  const { currentGroup, members, fetchGroup, fetchMembers, leaveGroup, joinGroup, deleteGroup } = useGroups();
   const { events, fetchEventsByGroup } = useEvents();
   const [showInvite, setShowInvite] = useState(false);
 
@@ -45,6 +45,13 @@ export function GroupDetailPage() {
     fetchMembers(id);
   };
 
+  const handleDelete = async () => {
+    if (!id) return;
+    if (!confirm(`Are you sure you want to delete "${currentGroup?.name}"? This will permanently remove the group and all its events.`)) return;
+    await deleteGroup(id);
+    navigate('/groups');
+  };
+
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
       <div className="mb-8">
@@ -73,6 +80,12 @@ export function GroupDetailPage() {
                   className="flex items-center gap-1 rounded-lg border border-red-200 px-3 py-2.5 text-sm text-red-600 hover:bg-red-50 active:bg-red-100">
                   <LogOut className="h-4 w-4" /> <span className="sm:hidden">Leave</span>
                 </button>
+                {isAdmin && (
+                  <button onClick={handleDelete}
+                    className="flex items-center gap-1 rounded-lg border border-red-300 bg-red-50 px-3 py-2.5 text-sm font-medium text-red-700 hover:bg-red-100 active:bg-red-200">
+                    <Trash2 className="h-4 w-4" /> <span className="sm:hidden">Delete Group</span>
+                  </button>
+                )}
               </>
             ) : (
               <button onClick={handleJoin}

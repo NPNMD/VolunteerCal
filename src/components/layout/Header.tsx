@@ -18,7 +18,7 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 border-b backdrop-blur-md" style={{borderColor: '#F5F3F0', backgroundColor: 'rgba(250, 248, 245, 0.8)'}}>
       <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link to="/" className="flex items-center gap-2 text-lg font-bold sm:text-xl text-coral-500" style={{color: '#FF6B5A'}}>
+        <Link to="/" className="flex items-center gap-2 text-lg font-bold sm:text-xl text-purple-500" style={{color: '#9B4DCA'}}>
           <Calendar className="h-6 w-6 sm:h-7 sm:w-7" strokeWidth={2.5} />
           <span className="hidden xs:inline">VolunteerCal</span>
           <span className="xs:hidden">VC</span>
@@ -38,7 +38,7 @@ export function Header() {
                 to={to}
                 className={`rounded-xl px-3 py-2 text-sm font-medium transition-colors`}
                 style={isActive(to) 
-                  ? {backgroundColor: '#FDF5F2', color: '#FF6B5A'} 
+                  ? {backgroundColor: '#F5F0FA', color: '#8B5CF6'} 
                   : {color: '#5C5854'}}
               >
                 {label}
@@ -76,7 +76,7 @@ export function Header() {
               <Link to="/login" className="rounded-xl px-3 py-2 text-sm font-medium sm:px-4 transition-colors hover:bg-cream-100" style={{color: '#5C5854'}}>
                 Sign In
               </Link>
-              <Link to="/register" className="rounded-xl px-3 py-2 text-sm font-medium text-white sm:px-4 bg-coral-500 hover:bg-coral-600 transition-colors" style={{backgroundColor: '#FF6B5A'}}>
+              <Link to="/register" className="rounded-xl px-3 py-2 text-sm font-medium text-white sm:px-4 bg-purple-500 hover:bg-purple-600 transition-colors" style={{backgroundColor: '#9B4DCA'}}>
                 Get Started
               </Link>
             </div>

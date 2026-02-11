@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
+import { useParams, Link, useNavigate } from 'react-router-dom';
+import { ArrowLeft, Trash2 } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
 import { useEvents } from '@/hooks/useEvents';
 import { useSignups } from '@/hooks/useSignups';
+import { useGroups } from '@/hooks/useGroups';
 import { profilesService } from '@/services/profiles.service';
 import { EventDetail } from '@/components/events/EventDetail';
 import { SignUpButton } from '@/components/events/SignUpButton';
@@ -13,9 +14,11 @@ import type { Dependent } from '@/types';
 
 export function EventDetailPage() {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const { user } = useAuth();
-  const { currentEvent, fetchEvent } = useEvents();
+  const { currentEvent, fetchEvent, deleteEvent } = useEvents();
   const { signups, isUserSignedUp, currentSignup, signupCount, loading, fetchSignups, checkSignupStatus, signUp, cancelSignup } = useSignups();
+  const { members, fetchMembers } = useGroups();
   const [dependents, setDependents] = useState<Dependent[]>([]);
 
   useEffect(() => {
@@ -24,6 +27,12 @@ export function EventDetailPage() {
       fetchSignups(id);
     }
   }, [id, fetchEvent, fetchSignups]);
+
+  useEffect(() => {
+    if (currentEvent?.group_id) {
+      fetchMembers(currentEvent.group_id);
+    }
+  }, [currentEvent?.group_id, fetchMembers]);
 
   useEffect(() => {
     if (id && user) {
@@ -39,12 +48,29 @@ export function EventDetailPage() {
   const isPastDeadline = currentEvent.signup_deadline ? isPast(currentEvent.signup_deadline) : false;
   const isFull = currentEvent.max_capacity ? signupCount >= currentEvent.max_capacity : false;
   const signedUpDependentIds = signups.filter(s => s.user_id === user?.id && s.dependent_id).map(s => s.dependent_id!);
+  const isCreator = currentEvent.created_by === user?.id;
+  const isGroupAdmin = members.some(m => m.user_id === user?.id && m.role === 'admin');
+  const canDeleteEvent = isCreator || isGroupAdmin;
+
+  const handleDeleteEvent = async () => {
+    if (!id || !confirm('Are you sure you want to delete this event? This cannot be undone.')) return;
+    await deleteEvent(id);
+    navigate(`/groups/${currentEvent.group_id}`);
+  };
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
-      <Link to={`/groups/${currentEvent.group_id}`} className="mb-6 inline-flex items-center gap-1 text-sm text-gray-500 hover:text-gray-700">
-        <ArrowLeft className="h-4 w-4" /> Back to group
-      </Link>
+      <div className="mb-6 flex items-center justify-between gap-4">
+        <Link to={`/groups/${currentEvent.group_id}`} className="inline-flex items-center gap-1 text-sm text-gray-500 hover:text-gray-700">
+          <ArrowLeft className="h-4 w-4" /> Back to group
+        </Link>
+        {canDeleteEvent && (
+          <button onClick={handleDeleteEvent}
+            className="inline-flex items-center gap-1 rounded-lg border border-red-300 bg-red-50 px-3 py-2 text-sm font-medium text-red-700 hover:bg-red-100 active:bg-red-200">
+            <Trash2 className="h-4 w-4" /> Delete Event
+          </button>
+        )}
+      </div>
 
       <div className="rounded-xl border border-gray-200 bg-white p-6 sm:p-8">
         <EventDetail event={currentEvent} signupCount={signupCount} />

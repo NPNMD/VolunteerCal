@@ -6,7 +6,7 @@ export function HeroSection() {
   const { user } = useAuth();
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-coral-500 via-honey-500 to-terracotta-500 animate-gradient px-4 py-20 text-white sm:py-28 lg:py-36" style={{backgroundImage: 'linear-gradient(135deg, #FF6B5A 0%, #F4A261 50%, #D97757 100%)'}}>
+    <section className="relative overflow-hidden bg-gradient-to-br from-purple-500 via-orchid-500 to-sunset-purple animate-gradient px-4 py-20 text-white sm:py-28 lg:py-36" style={{backgroundImage: 'linear-gradient(135deg, #9B4DCA 0%, #8B5CF6 50%, #C084FC 100%)'}}>
       {/* Decorative floating elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
         <div className="animate-float absolute top-16 left-[10%] flex h-14 w-14 items-center justify-center rounded-2xl bg-white/10 backdrop-blur-sm">
@@ -54,7 +54,7 @@ export function HeroSection() {
             <Link
               to="/dashboard"
               className="group inline-flex items-center gap-2 rounded-2xl px-8 py-4 text-base font-bold shadow-xl transition-all hover:shadow-2xl active:scale-[0.98] bg-cream-50 text-charcoal-900" 
-              style={{backgroundColor: '#FAF8F5', color: '#2C2825', boxShadow: '0 10px 40px -10px rgba(217, 119, 87, 0.3)'}}
+              style={{backgroundColor: '#FAF8F5', color: '#2C2825', boxShadow: '0 10px 40px -10px rgba(155, 77, 202, 0.3)'}}
             >
               Go to Dashboard
               <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" strokeWidth={2.5} />
@@ -64,7 +64,7 @@ export function HeroSection() {
               <Link
                 to="/register"
                 className="group inline-flex items-center gap-2 rounded-2xl px-8 py-4 text-base font-bold shadow-xl transition-all hover:shadow-2xl animate-pulse-glow active:scale-[0.98] bg-cream-50 text-charcoal-900"
-                style={{backgroundColor: '#FAF8F5', color: '#2C2825', boxShadow: '0 10px 40px -10px rgba(217, 119, 87, 0.3)'}}
+                style={{backgroundColor: '#FAF8F5', color: '#2C2825', boxShadow: '0 10px 40px -10px rgba(155, 77, 202, 0.3)'}}
               >
                 Get Started Free
                 <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" strokeWidth={2.5} />

@@ -81,11 +81,12 @@ export function useGroups() {
     try {
       await groupsService.deleteGroup(groupId);
       setGroups(prev => prev.filter(g => g.id !== groupId));
+      if (currentGroup?.id === groupId) setCurrentGroup(null);
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Failed to delete group');
       throw err;
     }
-  }, []);
+  }, [currentGroup?.id]);
 
   const fetchMembers = useCallback(async (groupId: string) => {
     try {

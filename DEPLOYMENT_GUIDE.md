@@ -114,6 +114,8 @@ After backend deployment is complete, deploy your frontend:
    - `VITE_SUPABASE_ANON_KEY`: `sb_publishable_5KLZFxJHqf6InYPV7wY79A_pttBOJI3`
 4. Deploy!
 
+**Note:** The project includes `vercel.json` with SPA rewrites so that refreshing the page on any route (e.g., `/dashboard`, `/events/123`) serves `index.html` instead of 404. This fixes the "404 NOT_FOUND" error when refreshing deep-linked or client-side routes.
+
 ### Option B: Netlify
 
 1. Go to https://netlify.com
@@ -123,6 +125,8 @@ After backend deployment is complete, deploy your frontend:
    - Publish directory: `dist`
 4. Add environment variables (same as Vercel)
 5. Deploy!
+
+**Note:** The project includes `public/_redirects` (copied to `dist` on build) so that all routes fall back to `index.html`. This prevents 404 errors when refreshing the page on client-side routes.
 
 ### Option C: Other Platforms
 
@@ -172,6 +176,13 @@ npx supabase migration new migration_name
 ```
 
 ## 🆘 Troubleshooting
+
+### 404 NOT_FOUND when refreshing the page
+If you see `404: NOT_FOUND` (e.g., `Code: NOT_FOUND ID: cle1::...`) when refreshing on routes like `/dashboard` or `/events/123`:
+
+- **Vercel:** Ensure `vercel.json` exists with the SPA rewrites config. Redeploy after adding it.
+- **Netlify:** Ensure `public/_redirects` exists with `/* /index.html 200`. It is copied to `dist` during build.
+- **Local preview:** Run `npm run preview` — the Vite config includes SPA fallback for the preview server.
 
 ### "Access token not provided"
 - Run `npx supabase login` with your token from Step 1

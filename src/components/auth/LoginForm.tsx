@@ -35,7 +35,7 @@ export function LoginForm() {
       </div>
 
       {error && (
-        <div className="rounded-xl p-4 text-sm" style={{backgroundColor: '#FDF5F2', color: '#E76F51'}}>
+        <div className="rounded-xl p-4 text-sm" style={{backgroundColor: '#F5F0FA', color: '#E76F51'}}>
           {error}
         </div>
       )}
@@ -85,8 +85,8 @@ export function LoginForm() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full rounded-xl py-3 text-sm font-semibold text-white transition-colors active:scale-[0.98] disabled:opacity-50 sm:py-2.5 bg-coral-500 hover:bg-coral-600"
-          style={{backgroundColor: loading ? '#FFB5AD' : '#FF6B5A'}}
+          className="w-full rounded-xl py-3 text-sm font-semibold text-white transition-colors active:scale-[0.98] disabled:opacity-50 sm:py-2.5 bg-purple-500 hover:bg-purple-600"
+          style={{backgroundColor: loading ? '#C4A7E5' : '#9B4DCA'}}
         >
           {loading ? 'Signing in...' : 'Sign In'}
         </button>
@@ -108,7 +108,7 @@ export function LoginForm() {
 
       <p className="text-center text-sm" style={{color: '#8B8480'}}>
         Don't have an account?{' '}
-        <Link to="/register" className="font-medium text-coral-500 hover:text-coral-600" style={{color: '#FF6B5A'}}>Sign up</Link>
+        <Link to="/register" className="font-medium text-purple-500 hover:text-purple-600" style={{color: '#9B4DCA'}}>Sign up</Link>
       </p>
     </div>
   );

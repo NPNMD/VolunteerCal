@@ -9,7 +9,7 @@ export function CTASection() {
 
   return (
     <section className="px-4 py-24 sm:px-6 lg:px-8" style={{backgroundColor: '#FAF8F5'}}>
-      <div className="relative mx-auto max-w-4xl overflow-hidden rounded-3xl animate-gradient px-6 py-16 text-center text-white shadow-2xl sm:px-12 sm:py-20" style={{backgroundImage: 'linear-gradient(135deg, #FF6B5A 0%, #D97757 50%, #F4A261 100%)', boxShadow: '0 25px 50px -12px rgba(217, 119, 87, 0.25)'}}>
+      <div className="relative mx-auto max-w-4xl overflow-hidden rounded-3xl animate-gradient px-6 py-16 text-center text-white shadow-2xl sm:px-12 sm:py-20" style={{backgroundImage: 'linear-gradient(135deg, #9B4DCA 0%, #8B5CF6 50%, #C084FC 100%)', boxShadow: '0 25px 50px -12px rgba(155, 77, 202, 0.25)'}}>
         {/* Organic warm blobs instead of dots */}
         <div
           className="absolute inset-0 opacity-20"

@@ -5,13 +5,13 @@ const features = [
     icon: Users,
     title: 'Foundation Groups',
     desc: 'Create groups for churches, PTOs, nonprofits, or any volunteer community. Manage members, roles, and invites all in one place.',
-    color: 'coral',
+    color: 'purple',
   },
   {
     icon: Calendar,
     title: 'Shared Calendar',
     desc: 'One beautiful calendar for all your events across every group. Month, week, day, or list view -- your volunteers always know what\'s next.',
-    color: 'terracotta',
+    color: 'orchid',
   },
   {
     icon: UserCheck,
@@ -29,7 +29,7 @@ const features = [
     icon: Search,
     title: 'Powerful Search',
     desc: 'Find any event instantly by name, date, category, creator, or group. Combine filters to find exactly what you need.',
-    color: 'teal',
+    color: 'sunset',
   },
   {
     icon: Globe,
@@ -40,12 +40,12 @@ const features = [
 ];
 
 const colorMap: Record<string, { bg: string; bgStyle?: string; icon: string; iconStyle?: string; border: string; borderStyle?: string }> = {
-  coral:     { bg: 'bg-terracotta-50', bgStyle: '#FDF5F2', icon: 'text-coral-500', iconStyle: '#FF6B5A', border: 'border-cream-100', borderStyle: '#F5F3F0' },
-  terracotta:{ bg: 'bg-terracotta-50', bgStyle: '#FDF5F2', icon: 'text-terracotta-500', iconStyle: '#D97757', border: 'border-cream-100', borderStyle: '#F5F3F0' },
-  sage:      { bg: 'bg-terracotta-50', bgStyle: '#FDF5F2', icon: 'text-sage-500', iconStyle: '#7FB069', border: 'border-cream-100', borderStyle: '#F5F3F0' },
-  yellow:    { bg: 'bg-terracotta-50', bgStyle: '#FDF5F2', icon: 'text-yellow-500', iconStyle: '#FFB830', border: 'border-cream-100', borderStyle: '#F5F3F0' },
-  teal:      { bg: 'bg-terracotta-50', bgStyle: '#FDF5F2', icon: 'text-teal-400', iconStyle: '#4ECDC4', border: 'border-cream-100', borderStyle: '#F5F3F0' },
-  lavender:  { bg: 'bg-terracotta-50', bgStyle: '#FDF5F2', icon: 'text-lavender-300', iconStyle: '#B8A4D4', border: 'border-cream-100', borderStyle: '#F5F3F0' },
+  purple:    { bg: 'bg-purple-50', bgStyle: '#F5F0FA', icon: 'text-purple-500', iconStyle: '#9B4DCA', border: 'border-cream-100', borderStyle: '#F5F3F0' },
+  orchid:    { bg: 'bg-purple-50', bgStyle: '#F5F0FA', icon: 'text-orchid-500', iconStyle: '#8B5CF6', border: 'border-cream-100', borderStyle: '#F5F3F0' },
+  sage:      { bg: 'bg-purple-50', bgStyle: '#F5F0FA', icon: 'text-sage-500', iconStyle: '#7FB069', border: 'border-cream-100', borderStyle: '#F5F3F0' },
+  yellow:    { bg: 'bg-purple-50', bgStyle: '#F5F0FA', icon: 'text-yellow-500', iconStyle: '#FFB830', border: 'border-cream-100', borderStyle: '#F5F3F0' },
+  sunset:    { bg: 'bg-purple-50', bgStyle: '#F5F0FA', icon: 'text-sunset-purple', iconStyle: '#C084FC', border: 'border-cream-100', borderStyle: '#F5F3F0' },
+  lavender:  { bg: 'bg-purple-50', bgStyle: '#F5F0FA', icon: 'text-lavender-300', iconStyle: '#B8A4D4', border: 'border-cream-100', borderStyle: '#F5F3F0' },
 };
 
 export function FeaturesSection() {
@@ -54,7 +54,7 @@ export function FeaturesSection() {
       <div className="mx-auto max-w-6xl">
         {/* Section header */}
         <div className="mx-auto max-w-2xl text-center mb-14">
-          <p className="text-sm font-bold uppercase tracking-widest mb-3 text-coral-500" style={{color: '#FF6B5A'}}>
+          <p className="text-sm font-bold uppercase tracking-widest mb-3 text-purple-500" style={{color: '#9B4DCA'}}>
             Features
           </p>
           <h2 className="text-3xl font-extrabold sm:text-4xl text-charcoal-900" style={{color: '#2C2825'}}>
@@ -82,7 +82,7 @@ export function FeaturesSection() {
               >
                 <div
                   className={`mb-5 flex h-12 w-12 items-center justify-center rounded-xl transition-transform group-hover:scale-110`}
-                  style={{backgroundColor: c.bgStyle || '#FDF5F2'}}
+                  style={{backgroundColor: c.bgStyle || '#F5F0FA'}}
                 >
                   <f.icon className={`h-6 w-6`} style={{color: c.iconStyle}} strokeWidth={2.5} />
                 </div>

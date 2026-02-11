@@ -134,7 +134,34 @@ The current VolunteerCal design is clean and functional but suffers from a cold,
 - Lacks personality and warmth
 - Too "perfect" and geometric
 
-### Recommended Font Pairing
+### Current Implementation (Refined, Classy Pairing)
+
+*Updated Feb 2026: Typography switched to an editorial, refined aesthetic.*
+
+#### Headings: **Cormorant Garamond** (Google Fonts)
+- **Link:** `https://fonts.google.com/specimen/Cormorant+Garamond`
+- **Why:** Elegant serif with refined, editorial character—feels timeless and sophisticated
+- **Characteristics:**
+  - Classic Garamond-inspired proportions
+  - Refined letterforms, not generic
+  - Works beautifully at display sizes
+  - Adds class without feeling stuffy
+- **Usage:** All headings (h1-h6), hero text, section titles
+- **Weights:** 400–700; 0.02em letter-spacing for headings
+
+#### Body Text: **Crimson Pro** (Google Fonts)
+- **Link:** `https://fonts.google.com/specimen/Crimson+Pro`
+- **Why:** Readable serif with a book-like, refined feel—excellent for long-form content
+- **Characteristics:**
+  - Warm, legible at body sizes
+  - Works well with Cormorant Garamond
+  - Editorial, literary aesthetic
+- **Usage:** Body text, form labels, descriptions, metadata
+- **Weights:** 400 (Regular), 500 (Medium), 600 (Semibold), 700 (Bold)
+
+### Alternative Option (Warm, Friendly Sans-Serif)
+
+*Previous pairing—retained for future reference or A/B testing.*
 
 #### Headings: **Outfit** (Google Fonts)
 - **Link:** `https://fonts.google.com/specimen/Outfit`
@@ -167,14 +194,24 @@ If simplicity is preferred, use **Outfit** alone across all elements:
 
 ### Font Stack Implementation
 
+**Current (classy serif pairing):**
+```css
+/* Headings */
+font-family: 'Cormorant Garamond', 'Georgia', 'Times New Roman', serif;
+
+/* Body */
+font-family: 'Crimson Pro', 'Georgia', 'Times New Roman', serif;
+
+/* Serif fallbacks for cohesive look */
+```
+
+**Alternative (warm sans-serif):**
 ```css
 /* Headings */
 font-family: 'Outfit', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 
 /* Body */
 font-family: 'Manrope', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-
-/* Fallback preserved for graceful degradation */
 ```
 
 ### Typography Guidelines

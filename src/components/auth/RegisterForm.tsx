@@ -40,7 +40,7 @@ export function RegisterForm() {
         </div>
         <h2 className="text-2xl font-bold text-charcoal-900" style={{color: '#2C2825'}}>Check your email</h2>
         <p className="text-warm-gray-600" style={{color: '#8B8480'}}>We sent a confirmation link to <strong>{email}</strong>. Click it to activate your account.</p>
-        <Link to="/login" className="inline-block rounded-xl px-6 py-2.5 text-sm font-medium text-white bg-coral-500 hover:bg-coral-600 transition-colors" style={{backgroundColor: '#FF6B5A'}}>
+        <Link to="/login" className="inline-block rounded-xl px-6 py-2.5 text-sm font-medium text-white bg-purple-500 hover:bg-purple-600 transition-colors" style={{backgroundColor: '#9B4DCA'}}>
           Back to Sign In
         </Link>
       </div>
@@ -55,7 +55,7 @@ export function RegisterForm() {
       </div>
 
       {error && (
-        <div className="rounded-xl p-4 text-sm" style={{backgroundColor: '#FDF5F2', color: '#E76F51'}}>{error}</div>
+        <div className="rounded-xl p-4 text-sm" style={{backgroundColor: '#F5F0FA', color: '#E76F51'}}>{error}</div>
       )}
 
       <form onSubmit={handleSubmit} className="space-y-5">
@@ -105,8 +105,8 @@ export function RegisterForm() {
           </div>
         </div>
         <button type="submit" disabled={loading}
-          className="w-full rounded-xl py-3 text-sm font-semibold text-white transition-colors active:scale-[0.98] disabled:opacity-50 sm:py-2.5 bg-coral-500 hover:bg-coral-600"
-          style={{backgroundColor: loading ? '#FFB5AD' : '#FF6B5A'}}>
+          className="w-full rounded-xl py-3 text-sm font-semibold text-white transition-colors active:scale-[0.98] disabled:opacity-50 sm:py-2.5 bg-purple-500 hover:bg-purple-600"
+          style={{backgroundColor: loading ? '#C4A7E5' : '#9B4DCA'}}>
           {loading ? 'Creating account...' : 'Create Account'}
         </button>
       </form>
@@ -125,7 +125,7 @@ export function RegisterForm() {
 
       <p className="text-center text-sm" style={{color: '#8B8480'}}>
         Already have an account?{' '}
-        <Link to="/login" className="font-medium text-coral-500 hover:text-coral-600" style={{color: '#FF6B5A'}}>Sign in</Link>
+        <Link to="/login" className="font-medium text-purple-500 hover:text-purple-600" style={{color: '#9B4DCA'}}>Sign in</Link>
       </p>
     </div>
   );

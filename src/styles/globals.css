@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
-/* Google Fonts Import - Warm, Friendly Typography */
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700&display=swap');
+/* Google Fonts Import - Refined, Classy Typography */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Crimson+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
 
 /*
  * VolunteerCal Global Styles
@@ -11,25 +11,27 @@
 
 /* FullCalendar overrides for warm, community-focused look */
 :root {
-  /* === WARM COLOR PALETTE === */
-  /* Primary Colors */
-  --color-coral-500: #FF6B5A;
-  --color-coral-600: #E85544;
-  --color-coral-400: #FF8778;
+  /* === WARM PURPLE PALETTE === */
+  /* Primary Purple Colors */
+  --color-purple-500: #9B4DCA; /* Rich Plum - Primary */
+  --color-purple-600: #7F3DAB; /* Darker Rich Plum - Hover state */
+  --color-purple-400: #A78BFA; /* Warm Violet - Lighter interactive */
   
-  --color-yellow-500: #FFB830;
+  --color-lavender-300: #B8A4D4; /* Soft Lavender - Secondary */
+  --color-orchid-500: #8B5CF6; /* Deep Orchid - Tertiary/vibrant */
+  --color-sunset-purple: #C084FC; /* Sunset Purple - Warm highlights */
+  
+  --color-yellow-500: #FFB830; /* Sunny Yellow - Optimistic accents */
   --color-yellow-400: #FFCA5A;
   
-  --color-terracotta-500: #D97757;
-  --color-terracotta-600: #C26644;
-  --color-terracotta-50: #FDF5F2;
-  
-  --color-sage-500: #7FB069;
+  --color-sage-500: #7FB069; /* Fresh Sage Green - Success states */
   --color-sage-600: #6A9557;
   
   /* Secondary Colors */
   --color-teal-400: #4ECDC4;
-  --color-lavender-300: #B8A4D4;
+  
+  /* Supporting warm colors (retain light backgrounds) */
+  --color-purple-50: #F5F0FA; /* Light purple background */
   
   /* Neutral Colors (Warm Palette) */
   --color-cream-50: #FAF8F5;
@@ -47,15 +49,15 @@
   --color-warm-red-500: #E76F51;
   --color-honey-500: #F4A261;
   
-  /* FullCalendar Variables - Updated to Warm Palette */
+  /* FullCalendar Variables - Updated to Warm Purple Palette */
   --fc-border-color: var(--color-warm-gray-300);
-  --fc-button-bg-color: var(--color-coral-500);
-  --fc-button-border-color: var(--color-coral-500);
-  --fc-button-hover-bg-color: var(--color-coral-600);
-  --fc-button-hover-border-color: var(--color-coral-600);
-  --fc-button-active-bg-color: var(--color-coral-600);
-  --fc-button-active-border-color: var(--color-coral-600);
-  --fc-today-bg-color: #FFF5F3;
+  --fc-button-bg-color: var(--color-purple-500);
+  --fc-button-border-color: var(--color-purple-500);
+  --fc-button-hover-bg-color: var(--color-purple-600);
+  --fc-button-hover-border-color: var(--color-purple-600);
+  --fc-button-active-bg-color: var(--color-purple-600);
+  --fc-button-active-border-color: var(--color-purple-600);
+  --fc-today-bg-color: #F5F0FA;
   --fc-event-border-color: transparent;
   --fc-page-bg-color: transparent;
   --fc-neutral-bg-color: var(--color-cream-50);
@@ -76,9 +78,9 @@ html {
   background-color: var(--color-cream-50);
 }
 
-/* Body defaults - Warm, friendly typography */
+/* Body defaults - Refined, classy typography */
 body {
-  font-family: 'Manrope', 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: 'Crimson Pro', 'Georgia', 'Times New Roman', serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--color-cream-50);
@@ -90,10 +92,11 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Headings use Outfit for warmth and personality */
+/* Headings use Cormorant Garamond for elegance and refinement */
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Outfit', 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: 'Cormorant Garamond', 'Georgia', 'Times New Roman', serif;
   color: var(--color-charcoal-900);
+  letter-spacing: 0.02em;
 }
 
 /* Use dynamic viewport height for full-screen layouts (mobile URL bar aware) */
@@ -177,7 +180,7 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
   color: var(--color-warm-gray-600);
 }
 
@@ -188,7 +191,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .fc .fc-day-today .fc-daygrid-day-number {
-  color: var(--color-coral-500);
+  color: var(--color-purple-500);
   font-weight: 700;
 }
 
@@ -248,9 +251,9 @@ h1, h2, h3, h4, h5, h6 {
   background: var(--color-warm-gray-500);
 }
 
-/* Focus ring for accessibility - Warm Coral */
+/* Focus ring for accessibility - Warm Purple */
 *:focus-visible {
-  outline: 2px solid var(--color-coral-500);
+  outline: 2px solid var(--color-orchid-500);
   outline-offset: 2px;
 }
 
@@ -325,25 +328,25 @@ h1, h2, h3, h4, h5, h6 {
   animation: float 8s ease-in-out 1s infinite;
 }
 
-/* Pulse glow for CTA buttons - Updated to Warm Coral */
+/* Pulse glow for CTA buttons - Updated to Warm Purple */
 @keyframes pulseGlow {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 107, 90, 0.4); }
-  50% { box-shadow: 0 0 0 12px rgba(255, 107, 90, 0); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(155, 77, 202, 0.4); }
+  50% { box-shadow: 0 0 0 12px rgba(155, 77, 202, 0); }
 }
 
 .animate-pulse-glow {
   animation: pulseGlow 3s ease-in-out infinite;
 }
 
-/* Gradient text utility - Updated to warm colors */
+/* Gradient text utility - Updated to warm purple colors */
 .text-gradient {
-  background: linear-gradient(135deg, #FF6B5A, #FFB830, #D97757);
+  background: linear-gradient(135deg, #9B4DCA, #FFB830, #8B5CF6);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* Animated background gradient for hero - Warm colors */
+/* Animated background gradient for hero - Warm purple colors */
 @keyframes gradientShift {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
@@ -372,7 +375,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .hover-lift:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 32px -8px rgba(217, 119, 87, 0.15);
+  box-shadow: 0 12px 32px -8px rgba(155, 77, 202, 0.15);
 }
 
 /* Glass morphism card style - Warm colors */
@@ -385,17 +388,17 @@ h1, h2, h3, h4, h5, h6 {
 
 /* === Custom Tailwind-style Utility Classes === */
 @layer utilities {
-  /* Background Colors */
-  .bg-coral-500 { background-color: var(--color-coral-500); }
-  .bg-coral-600 { background-color: var(--color-coral-600); }
-  .bg-coral-400 { background-color: var(--color-coral-400); }
+  /* Background Colors - Purple Palette */
+  .bg-purple-500 { background-color: var(--color-purple-500); }
+  .bg-purple-600 { background-color: var(--color-purple-600); }
+  .bg-purple-400 { background-color: var(--color-purple-400); }
+  .bg-purple-50 { background-color: var(--color-purple-50); }
+  
+  .bg-orchid-500 { background-color: var(--color-orchid-500); }
+  .bg-sunset-purple { background-color: var(--color-sunset-purple); }
   
   .bg-yellow-500 { background-color: var(--color-yellow-500); }
   .bg-yellow-400 { background-color: var(--color-yellow-400); }
-  
-  .bg-terracotta-500 { background-color: var(--color-terracotta-500); }
-  .bg-terracotta-600 { background-color: var(--color-terracotta-600); }
-  .bg-terracotta-50 { background-color: var(--color-terracotta-50); }
   
   .bg-sage-500 { background-color: var(--color-sage-500); }
   .bg-sage-600 { background-color: var(--color-sage-600); }
@@ -415,16 +418,16 @@ h1, h2, h3, h4, h5, h6 {
   .bg-warm-red-500 { background-color: var(--color-warm-red-500); }
   .bg-honey-500 { background-color: var(--color-honey-500); }
   
-  /* Text Colors */
-  .text-coral-500 { color: var(--color-coral-500); }
-  .text-coral-600 { color: var(--color-coral-600); }
-  .text-coral-400 { color: var(--color-coral-400); }
+  /* Text Colors - Purple Palette */
+  .text-purple-500 { color: var(--color-purple-500); }
+  .text-purple-600 { color: var(--color-purple-600); }
+  .text-purple-400 { color: var(--color-purple-400); }
+  
+  .text-orchid-500 { color: var(--color-orchid-500); }
+  .text-sunset-purple { color: var(--color-sunset-purple); }
   
   .text-yellow-500 { color: var(--color-yellow-500); }
   .text-yellow-400 { color: var(--color-yellow-400); }
-  
-  .text-terracotta-500 { color: var(--color-terracotta-500); }
-  .text-terracotta-600 { color: var(--color-terracotta-600); }
   
   .text-sage-500 { color: var(--color-sage-500); }
   .text-sage-600 { color: var(--color-sage-600); }
@@ -441,12 +444,11 @@ h1, h2, h3, h4, h5, h6 {
   .text-warm-red-500 { color: var(--color-warm-red-500); }
   .text-honey-500 { color: var(--color-honey-500); }
   
-  /* Border Colors */
-  .border-coral-500 { border-color: var(--color-coral-500); }
-  .border-coral-600 { border-color: var(--color-coral-600); }
+  /* Border Colors - Purple Palette */
+  .border-purple-500 { border-color: var(--color-purple-500); }
+  .border-purple-600 { border-color: var(--color-purple-600); }
   
-  .border-terracotta-500 { border-color: var(--color-terracotta-500); }
-  .border-terracotta-600 { border-color: var(--color-terracotta-600); }
+  .border-orchid-500 { border-color: var(--color-orchid-500); }
   
   .border-sage-500 { border-color: var(--color-sage-500); }
   
@@ -455,24 +457,27 @@ h1, h2, h3, h4, h5, h6 {
   
   .border-cream-100 { border-color: var(--color-cream-100); }
   
-  /* Hover Background Colors */
-  .hover\:bg-coral-600:hover { background-color: var(--color-coral-600); }
-  .hover\:bg-coral-500:hover { background-color: var(--color-coral-500); }
+  /* Hover Background Colors - Purple Palette */
+  .hover\:bg-purple-600:hover { background-color: var(--color-purple-600); }
+  .hover\:bg-purple-500:hover { background-color: var(--color-purple-500); }
   
-  .hover\:bg-terracotta-600:hover { background-color: var(--color-terracotta-600); }
-  .hover\:bg-terracotta-50:hover { background-color: var(--color-terracotta-50); }
+  .hover\:bg-orchid-500:hover { background-color: var(--color-orchid-500); }
+  .hover\:bg-purple-50:hover { background-color: var(--color-purple-50); }
   
   .hover\:bg-sage-600:hover { background-color: var(--color-sage-600); }
   
   .hover\:bg-cream-100:hover { background-color: var(--color-cream-100); }
   .hover\:bg-warm-gray-100:hover { background-color: var(--color-warm-gray-100); }
   
-  /* Hover Text Colors */
-  .hover\:text-coral-600:hover { color: var(--color-coral-600); }
+  /* Hover Text Colors - Purple Palette */
+  .hover\:text-purple-600:hover { color: var(--color-purple-600); }
+  .hover\:text-orchid-500:hover { color: var(--color-orchid-500); }
   .hover\:text-sage-600:hover { color: var(--color-sage-600); }
   
-  /* Ring Colors (focus states) */
-  .ring-coral-500 { --tw-ring-color: var(--color-coral-500); }
+  /* Ring Colors (focus states) - Purple Palette */
+  .ring-purple-500 { --tw-ring-color: var(--color-purple-500); }
+  .ring-orchid-500 { --tw-ring-color: var(--color-orchid-500); }
   .ring-sage-500 { --tw-ring-color: var(--color-sage-500); }
-  .focus\:ring-coral-500:focus { --tw-ring-color: var(--color-coral-500); }
+  .focus\:ring-purple-500:focus { --tw-ring-color: var(--color-purple-500); }
+  .focus\:ring-orchid-500:focus { --tw-ring-color: var(--color-orchid-500); }
 }

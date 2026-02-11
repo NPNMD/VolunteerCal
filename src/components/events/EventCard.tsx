@@ -27,17 +27,17 @@ export function EventCard({ event, compact = false }: Props) {
       <div className="flex items-start gap-4">
         <div className={cn('flex flex-col items-center justify-center rounded-xl px-3 py-2 text-center')} 
           style={{
-            backgroundColor: upcoming ? '#FDF5F2' : '#F5F3F0'
+            backgroundColor: upcoming ? '#F5F0FA' : '#F5F3F0'
           }}>
           <span className={cn('text-xs font-medium uppercase')} 
             style={{
-              color: upcoming ? '#FF6B5A' : '#9E9690'
+              color: upcoming ? '#9B4DCA' : '#9E9690'
             }}>
             {formatDate(event.start_time).split(' ')[0]}
           </span>
           <span className={cn('text-xl font-bold')} 
             style={{
-              color: upcoming ? '#D97757' : '#8B8480'
+              color: upcoming ? '#8B5CF6' : '#8B8480'
             }}>
             {new Date(event.start_time).getDate()}
           </span>
@@ -51,7 +51,7 @@ export function EventCard({ event, compact = false }: Props) {
               {event.title}
             </h3>
             {event.status === 'cancelled' && (
-              <span className="rounded-full px-2 py-0.5 text-xs font-medium" style={{backgroundColor: '#FDF5F2', color: '#E76F51'}}>Cancelled</span>
+              <span className="rounded-full px-2 py-0.5 text-xs font-medium" style={{backgroundColor: '#F5F0FA', color: '#E76F51'}}>Cancelled</span>
             )}
           </div>
           {!compact && event.description && (
