@@ -43,16 +43,16 @@ export function GroupsPage() {
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-      <div className="flex items-center justify-between mb-8">
+      <div className="flex flex-col gap-4 mb-8 sm:flex-row sm:items-center sm:justify-between">
         <h1 className="text-2xl font-bold text-gray-900">Groups</h1>
         <div className="flex gap-2">
           <button onClick={() => setShowJoin(!showJoin)}
-            className="flex items-center gap-1 rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
+            className="flex flex-1 items-center justify-center gap-1 rounded-lg border border-gray-300 px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 active:bg-gray-100 sm:flex-none">
             <UserPlus className="h-4 w-4" /> Join
           </button>
           <button onClick={() => setShowCreate(!showCreate)}
-            className="flex items-center gap-1 rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700">
-            <Plus className="h-4 w-4" /> Create Group
+            className="flex flex-1 items-center justify-center gap-1 rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-medium text-white hover:bg-indigo-700 active:bg-indigo-800 sm:flex-none">
+            <Plus className="h-4 w-4" /> Create
           </button>
         </div>
       </div>

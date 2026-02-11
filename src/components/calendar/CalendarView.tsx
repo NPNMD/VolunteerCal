@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useCallback } from 'react';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -6,6 +6,7 @@ import listPlugin from '@fullcalendar/list';
 import interactionPlugin from '@fullcalendar/interaction';
 import { GROUP_COLORS } from '@/config/constants';
 import { EventPopover } from './EventPopover';
+import { useIsMobile } from '@/hooks/useIsMobile';
 import type { CalendarEvent } from '@/types';
 
 interface Props {
@@ -17,6 +18,7 @@ export function CalendarView({ events, onDateRangeChange }: Props) {
   const calendarRef = useRef<FullCalendar>(null);
   const [popoverEvent, setPopoverEvent] = useState<CalendarEvent | null>(null);
   const [popoverPos, setPopoverPos] = useState<{ x: number; y: number } | null>(null);
+  const isMobile = useIsMobile();
 
   const calendarEvents = events.map((event) => ({
     id: event.id,
@@ -28,36 +30,53 @@ export function CalendarView({ events, onDateRangeChange }: Props) {
     extendedProps: { event },
   }));
 
-  const handleEventClick = (info: any) => {
-    const rect = info.el.getBoundingClientRect();
+  const handleEventClick = useCallback((info: any) => {
     const calEvent = info.event.extendedProps.event as CalendarEvent;
     setPopoverEvent(calEvent);
-    setPopoverPos({ x: rect.right + 8, y: rect.top });
-  };
 
-  const closePopover = () => {
+    if (window.innerWidth < 640) {
+      // On mobile, show as bottom sheet (centered)
+      setPopoverPos({ x: 0, y: 0 });
+    } else {
+      const rect = info.el.getBoundingClientRect();
+      setPopoverPos({ x: rect.right + 8, y: rect.top });
+    }
+  }, []);
+
+  const closePopover = useCallback(() => {
     setPopoverEvent(null);
     setPopoverPos(null);
-  };
+  }, []);
+
+  // Responsive toolbar config
+  const headerToolbar = isMobile
+    ? {
+        left: 'prev,next',
+        center: 'title',
+        right: 'dayGridMonth,listWeek',
+      }
+    : {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
+      };
 
   return (
-    <div className="rounded-xl border border-gray-200 bg-white p-4 sm:p-6">
+    <div className="rounded-xl border border-gray-200 bg-white p-3 sm:p-6">
       <FullCalendar
         ref={calendarRef}
         plugins={[dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin]}
-        initialView="dayGridMonth"
-        headerToolbar={{
-          left: 'prev,next today',
-          center: 'title',
-          right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
-        }}
+        initialView={isMobile ? 'listWeek' : 'dayGridMonth'}
+        headerToolbar={headerToolbar}
         events={calendarEvents}
         eventClick={handleEventClick}
         datesSet={(info) => onDateRangeChange?.(info.startStr, info.endStr)}
         height="auto"
         eventDisplay="block"
-        dayMaxEvents={3}
+        dayMaxEvents={isMobile ? 2 : 3}
         nowIndicator
+        // Mobile: show short day names (Mon → M)
+        dayHeaderFormat={isMobile ? { weekday: 'narrow' } : undefined}
       />
 
       <EventPopover event={popoverEvent} position={popoverPos} onClose={closePopover} />

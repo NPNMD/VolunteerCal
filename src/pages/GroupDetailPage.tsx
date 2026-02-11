@@ -48,35 +48,35 @@ export function GroupDetailPage() {
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
       <div className="mb-8">
-        <div className="flex flex-wrap items-start justify-between gap-4">
+        <div className="space-y-4">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">{currentGroup.name}</h1>
-            {currentGroup.description && <p className="mt-1 text-gray-600">{currentGroup.description}</p>}
+            <h1 className="text-xl font-bold text-gray-900 sm:text-2xl">{currentGroup.name}</h1>
+            {currentGroup.description && <p className="mt-1 text-sm text-gray-600 sm:text-base">{currentGroup.description}</p>}
             {currentGroup.category && (
               <span className="mt-2 inline-block rounded-full bg-indigo-100 px-3 py-0.5 text-xs font-medium text-indigo-700">
                 {currentGroup.category}
               </span>
             )}
           </div>
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
             {isMember ? (
               <>
                 <Link to={`/events/create?group=${id}`}
-                  className="flex items-center gap-1 rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700">
+                  className="flex flex-1 items-center justify-center gap-1 rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-medium text-white hover:bg-indigo-700 active:bg-indigo-800 sm:flex-none">
                   <Plus className="h-4 w-4" /> Create Event
                 </Link>
                 <button onClick={() => setShowInvite(true)}
-                  className="flex items-center gap-1 rounded-lg border border-gray-300 px-3 py-2 text-sm text-gray-700 hover:bg-gray-50">
-                  <Share2 className="h-4 w-4" />
+                  className="flex items-center gap-1 rounded-lg border border-gray-300 px-3 py-2.5 text-sm text-gray-700 hover:bg-gray-50 active:bg-gray-100">
+                  <Share2 className="h-4 w-4" /> <span className="sm:hidden">Invite</span>
                 </button>
                 <button onClick={handleLeave}
-                  className="flex items-center gap-1 rounded-lg border border-red-200 px-3 py-2 text-sm text-red-600 hover:bg-red-50">
-                  <LogOut className="h-4 w-4" />
+                  className="flex items-center gap-1 rounded-lg border border-red-200 px-3 py-2.5 text-sm text-red-600 hover:bg-red-50 active:bg-red-100">
+                  <LogOut className="h-4 w-4" /> <span className="sm:hidden">Leave</span>
                 </button>
               </>
             ) : (
               <button onClick={handleJoin}
-                className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700">
+                className="w-full rounded-lg bg-indigo-600 px-4 py-3 text-sm font-medium text-white hover:bg-indigo-700 active:bg-indigo-800 sm:w-auto sm:py-2">
                 Join Group
               </button>
             )}

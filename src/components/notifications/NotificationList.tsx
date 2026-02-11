@@ -12,24 +12,24 @@ interface Props {
 export function NotificationList({ notifications, onMarkAsRead, onDelete }: Props) {
   if (notifications.length === 0) {
     return (
-      <div className="px-4 py-8 text-center text-sm text-gray-500">
+      <div className="px-4 py-12 text-center text-sm text-gray-500">
         No notifications yet
       </div>
     );
   }
 
   return (
-    <div className="max-h-96 overflow-y-auto">
+    <div>
       {notifications.map((n) => (
         <div
           key={n.id}
           onClick={() => !n.is_read && onMarkAsRead(n.id)}
           className={cn(
-            'flex cursor-pointer items-start gap-3 border-b border-gray-100 px-4 py-3 transition-colors hover:bg-gray-50',
+            'flex cursor-pointer items-start gap-3 border-b border-gray-100 px-4 py-3.5 transition-colors hover:bg-gray-50 active:bg-gray-100',
             !n.is_read && 'bg-indigo-50/50'
           )}
         >
-          <div className={cn('mt-1 h-2 w-2 flex-shrink-0 rounded-full', n.is_read ? 'bg-transparent' : 'bg-indigo-500')} />
+          <div className={cn('mt-1.5 h-2 w-2 flex-shrink-0 rounded-full', n.is_read ? 'bg-transparent' : 'bg-indigo-500')} />
           <div className="min-w-0 flex-1">
             <p className="text-sm font-medium text-gray-900">{n.title}</p>
             {n.message && <p className="mt-0.5 text-xs text-gray-500 line-clamp-2">{n.message}</p>}
@@ -37,9 +37,9 @@ export function NotificationList({ notifications, onMarkAsRead, onDelete }: Prop
           </div>
           <button
             onClick={(e) => { e.stopPropagation(); onDelete(n.id); }}
-            className="flex-shrink-0 rounded p-1 text-gray-400 hover:bg-gray-200 hover:text-gray-600"
+            className="flex-shrink-0 rounded-lg p-2 text-gray-400 hover:bg-gray-200 hover:text-gray-600"
           >
-            <Trash2 className="h-3.5 w-3.5" />
+            <Trash2 className="h-4 w-4" />
           </button>
         </div>
       ))}

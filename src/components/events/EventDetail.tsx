@@ -80,13 +80,13 @@ export function EventDetail({ event, signupCount }: Props) {
         </div>
       )}
 
-      <div className="flex flex-wrap gap-3">
+      <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:gap-3">
         <a href={googleCalUrl} target="_blank" rel="noopener noreferrer"
-          className="flex items-center gap-2 rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
+          className="flex items-center justify-center gap-2 rounded-lg border border-gray-300 px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 active:bg-gray-100 sm:py-2">
           <ExternalLink className="h-4 w-4" /> Add to Google Calendar
         </a>
         <button onClick={() => downloadICS(event)}
-          className="flex items-center gap-2 rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
+          className="flex items-center justify-center gap-2 rounded-lg border border-gray-300 px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 active:bg-gray-100 sm:py-2">
           <Download className="h-4 w-4" /> Download .ics
         </button>
       </div>

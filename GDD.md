@@ -16,8 +16,8 @@
 
 | Layer | Technology |
 |-------|------------|
-| **Frontend** | React 18, TypeScript, Vite |
-| **Styling** | TailwindCSS, shadcn/ui |
+| **Frontend** | React 19, TypeScript, Vite |
+| **Styling** | TailwindCSS v4 |
 | **State** | Zustand |
 | **Calendar** | FullCalendar.js |
 | **Backend** | Supabase (PostgreSQL, Auth, Real-time, Storage) |
@@ -90,6 +90,42 @@
 | **event_signups** | Event sign-ups (user/dependent, event, waitlist status) |
 | **notifications** | In-app notifications |
 | **reminders** | Scheduled reminders (email, in-app) |
+
+---
+
+## Mobile-First Experience
+
+VolunteerCal is designed to be fully mobile-friendly with the following patterns:
+
+### Navigation
+- **Bottom navigation bar** — Authenticated users see a persistent bottom nav on mobile (Home, Groups, Calendar, Search, Alerts) with active state indicators and unread badge
+- **Simplified header** — Desktop nav is hidden on mobile; header shows logo, profile, and sign-out only
+- **Footer hidden on mobile** — Footer is hidden for authenticated users on mobile to avoid conflict with bottom nav
+
+### Touch Optimization
+- **44px minimum touch targets** — All buttons, links, and interactive elements meet Apple Human Interface Guidelines
+- **16px font on inputs** — Prevents iOS zoom-on-focus behavior
+- **Active states** — All interactive elements have `active:` press feedback for tactile response
+- **Tap highlight removed** — `-webkit-tap-highlight-color: transparent` for clean touch experience
+
+### Responsive Patterns
+- **Bottom sheet modals** — EventPopover, InviteModal, and NotificationBell use bottom sheet pattern on mobile instead of positioned popovers/dropdowns
+- **Collapsible filters** — Calendar and Search filters collapse into toggle sections on mobile with active filter count badges
+- **Full-width buttons** — Form submit/cancel buttons stack vertically and span full width on mobile
+- **Responsive calendar** — FullCalendar shows list view by default on mobile, with simplified toolbar (prev/next + month/list only), narrow day headers, and fewer max events per day
+
+### PWA & Viewport
+- `viewport-fit=cover` for edge-to-edge display on notched phones
+- `safe-area-inset` padding throughout the UI
+- `theme-color` meta tag for browser chrome matching
+- `apple-mobile-web-app-capable` for Add to Home Screen support
+- Dynamic viewport height (`100dvh`) for proper mobile browser URL bar behavior
+
+### Layout Adaptations
+- **Dashboard** — Quick actions span full-width on mobile; groups/events stack vertically
+- **Group detail** — Action buttons wrap with labels visible on mobile (Create Event, Invite, Leave)
+- **Event detail** — Calendar export buttons stack vertically on mobile
+- **Search** — Date pickers display in 2-column grid on mobile for compact layout
 
 ---
 
