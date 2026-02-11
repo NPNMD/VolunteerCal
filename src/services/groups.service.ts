@@ -21,14 +21,18 @@ function translateGroupError(err: { code?: string; message?: string }): Error {
 
 export const groupsService = {
   async getGroups(userId: string): Promise<Group[]> {
+    const { data: memberships, error: membersError } = await supabase
+      .from('group_members')
+      .select('group_id')
+      .eq('user_id', userId);
+    if (membersError) throw membersError;
+    const groupIds = (memberships || []).map((m) => m.group_id);
+    if (groupIds.length === 0) return [];
     const { data, error } = await supabase
       .from('groups')
-      .select(`
-        *,
-        group_members!inner(user_id),
-        creator:profiles(id, full_name, avatar_url)
-      `)
-      .eq('group_members.user_id', userId);
+      .select('*')
+      .in('id', groupIds)
+      .order('created_at', { ascending: false });
     if (error) throw error;
     return (data || []) as unknown as Group[];
   },
@@ -36,10 +40,7 @@ export const groupsService = {
   async getPublicGroups(): Promise<Group[]> {
     const { data, error } = await supabase
       .from('groups')
-      .select(`
-        *,
-        creator:profiles(id, full_name, avatar_url)
-      `)
+      .select('*')
       .eq('visibility', 'public')
       .order('created_at', { ascending: false });
     if (error) throw error;
@@ -49,10 +50,7 @@ export const groupsService = {
   async getGroup(groupId: string): Promise<Group> {
     const { data, error } = await supabase
       .from('groups')
-      .select(`
-        *,
-        creator:profiles(id, full_name, avatar_url)
-      `)
+      .select('*')
       .eq('id', groupId)
       .single();
     if (error) throw error;
@@ -60,9 +58,10 @@ export const groupsService = {
   },
 
   async createGroup(group: { name: string; description?: string; category?: string; visibility?: string; created_by: string }) {
+    const inviteCode = crypto.randomUUID().replace(/-/g, '').slice(0, 12);
     const { data, error } = await supabase
       .from('groups')
-      .insert(group)
+      .insert({ ...group, invite_code: inviteCode })
       .select()
       .single();
     if (error) throw translateGroupError(error);
@@ -100,14 +99,22 @@ export const groupsService = {
   async getMembers(groupId: string): Promise<GroupMember[]> {
     const { data, error } = await supabase
       .from('group_members')
-      .select(`
-        *,
-        profile:profiles(id, full_name, avatar_url, email)
-      `)
+      .select('*')
       .eq('group_id', groupId)
       .order('joined_at', { ascending: true });
     if (error) throw error;
-    return (data || []) as unknown as GroupMember[];
+    const members = (data || []) as unknown as GroupMember[];
+    if (members.length > 0) {
+      const { data: profiles } = await supabase
+        .from('profiles')
+        .select('id, full_name, avatar_url, email')
+        .in('id', members.map((m) => m.user_id));
+      const profileMap = new Map((profiles || []).map((p) => [p.id, p]));
+      members.forEach((m) => {
+        (m as GroupMember & { profile?: unknown }).profile = profileMap.get(m.user_id) ?? null;
+      });
+    }
+    return members;
   },
 
   async joinGroup(groupId: string, userId: string, role: string = 'member') {

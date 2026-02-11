@@ -17,35 +17,51 @@ export function EventCard({ event, compact = false }: Props) {
   return (
     <Link to={`/events/${event.id}`}
       className={cn(
-        'group block rounded-xl border border-gray-200 bg-white transition-all hover:border-gray-300 hover:shadow-md',
+        'group block rounded-2xl border transition-all hover:shadow-md',
         compact ? 'p-4' : 'p-5'
-      )}>
+      )}
+      style={{
+        backgroundColor: '#FAF8F5',
+        borderColor: '#F5F3F0',
+      }}>
       <div className="flex items-start gap-4">
-        <div className={cn('flex flex-col items-center justify-center rounded-lg px-3 py-2 text-center', upcoming ? 'bg-indigo-50' : 'bg-gray-100')}>
-          <span className={cn('text-xs font-medium uppercase', upcoming ? 'text-indigo-600' : 'text-gray-500')}>
+        <div className={cn('flex flex-col items-center justify-center rounded-xl px-3 py-2 text-center')} 
+          style={{
+            backgroundColor: upcoming ? '#FDF5F2' : '#F5F3F0'
+          }}>
+          <span className={cn('text-xs font-medium uppercase')} 
+            style={{
+              color: upcoming ? '#FF6B5A' : '#9E9690'
+            }}>
             {formatDate(event.start_time).split(' ')[0]}
           </span>
-          <span className={cn('text-xl font-bold', upcoming ? 'text-indigo-700' : 'text-gray-600')}>
+          <span className={cn('text-xl font-bold')} 
+            style={{
+              color: upcoming ? '#D97757' : '#8B8480'
+            }}>
             {new Date(event.start_time).getDate()}
           </span>
         </div>
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2">
-            <h3 className={cn('font-semibold truncate', compact ? 'text-sm' : 'text-base', 'text-gray-900 group-hover:text-indigo-600')}>
+            <h3 className={cn('font-semibold truncate transition-colors', compact ? 'text-sm' : 'text-base')} 
+              style={{
+                color: '#2C2825',
+              }}>
               {event.title}
             </h3>
             {event.status === 'cancelled' && (
-              <span className="rounded-full bg-red-100 px-2 py-0.5 text-xs font-medium text-red-700">Cancelled</span>
+              <span className="rounded-full px-2 py-0.5 text-xs font-medium" style={{backgroundColor: '#FDF5F2', color: '#E76F51'}}>Cancelled</span>
             )}
           </div>
           {!compact && event.description && (
-            <p className="mt-1 text-sm text-gray-500 line-clamp-2">{event.description}</p>
+            <p className="mt-1 text-sm line-clamp-2" style={{color: '#8B8480'}}>{event.description}</p>
           )}
-          <div className="mt-2 flex flex-wrap items-center gap-3 text-xs text-gray-500">
-            <span className="flex items-center gap-1"><Clock className="h-3.5 w-3.5" /> {formatTime(event.start_time)}</span>
-            {event.location && <span className="flex items-center gap-1"><MapPin className="h-3.5 w-3.5" /> {event.location}</span>}
+          <div className="mt-2 flex flex-wrap items-center gap-3 text-xs" style={{color: '#9E9690'}}>
+            <span className="flex items-center gap-1"><Clock className="h-3.5 w-3.5" strokeWidth={2.5} /> {formatTime(event.start_time)}</span>
+            {event.location && <span className="flex items-center gap-1"><MapPin className="h-3.5 w-3.5" strokeWidth={2.5} /> {event.location}</span>}
             {event.max_capacity && (
-              <span className="flex items-center gap-1"><Users className="h-3.5 w-3.5" /> {event.signup_count ?? 0}/{event.max_capacity}</span>
+              <span className="flex items-center gap-1"><Users className="h-3.5 w-3.5" strokeWidth={2.5} /> {event.signup_count ?? 0}/{event.max_capacity}</span>
             )}
             {(event.group as any)?.name && (
               <span className="rounded-full px-2 py-0.5 text-xs font-medium" style={{ backgroundColor: `${groupColor}15`, color: groupColor }}>

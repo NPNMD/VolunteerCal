@@ -5,63 +5,63 @@ const features = [
     icon: Users,
     title: 'Foundation Groups',
     desc: 'Create groups for churches, PTOs, nonprofits, or any volunteer community. Manage members, roles, and invites all in one place.',
-    color: 'indigo',
+    color: 'coral',
   },
   {
     icon: Calendar,
     title: 'Shared Calendar',
     desc: 'One beautiful calendar for all your events across every group. Month, week, day, or list view -- your volunteers always know what\'s next.',
-    color: 'purple',
+    color: 'terracotta',
   },
   {
     icon: UserCheck,
     title: 'One-Tap Sign-Ups',
     desc: 'Volunteers sign up themselves or their dependents with a single click. Capacity limits and waitlists are handled automatically.',
-    color: 'emerald',
+    color: 'sage',
   },
   {
     icon: Bell,
     title: 'Smart Reminders',
     desc: 'Automatic in-app and email reminders so nobody forgets. Real-time notifications when events change or spots open up.',
-    color: 'amber',
+    color: 'yellow',
   },
   {
     icon: Search,
     title: 'Powerful Search',
     desc: 'Find any event instantly by name, date, category, creator, or group. Combine filters to find exactly what you need.',
-    color: 'sky',
+    color: 'teal',
   },
   {
     icon: Globe,
     title: 'Google Calendar Sync',
     desc: 'Export events or subscribe to your calendar feed. VolunteerCal events show up right alongside your personal schedule.',
-    color: 'rose',
+    color: 'lavender',
   },
 ];
 
-const colorMap: Record<string, { bg: string; icon: string; border: string }> = {
-  indigo:  { bg: 'bg-indigo-50',  icon: 'text-indigo-600',  border: 'border-indigo-100' },
-  purple:  { bg: 'bg-purple-50',  icon: 'text-purple-600',  border: 'border-purple-100' },
-  emerald: { bg: 'bg-emerald-50', icon: 'text-emerald-600', border: 'border-emerald-100' },
-  amber:   { bg: 'bg-amber-50',   icon: 'text-amber-600',   border: 'border-amber-100' },
-  sky:     { bg: 'bg-sky-50',     icon: 'text-sky-600',     border: 'border-sky-100' },
-  rose:    { bg: 'bg-rose-50',    icon: 'text-rose-600',    border: 'border-rose-100' },
+const colorMap: Record<string, { bg: string; bgStyle?: string; icon: string; iconStyle?: string; border: string; borderStyle?: string }> = {
+  coral:     { bg: 'bg-terracotta-50', bgStyle: '#FDF5F2', icon: 'text-coral-500', iconStyle: '#FF6B5A', border: 'border-cream-100', borderStyle: '#F5F3F0' },
+  terracotta:{ bg: 'bg-terracotta-50', bgStyle: '#FDF5F2', icon: 'text-terracotta-500', iconStyle: '#D97757', border: 'border-cream-100', borderStyle: '#F5F3F0' },
+  sage:      { bg: 'bg-terracotta-50', bgStyle: '#FDF5F2', icon: 'text-sage-500', iconStyle: '#7FB069', border: 'border-cream-100', borderStyle: '#F5F3F0' },
+  yellow:    { bg: 'bg-terracotta-50', bgStyle: '#FDF5F2', icon: 'text-yellow-500', iconStyle: '#FFB830', border: 'border-cream-100', borderStyle: '#F5F3F0' },
+  teal:      { bg: 'bg-terracotta-50', bgStyle: '#FDF5F2', icon: 'text-teal-400', iconStyle: '#4ECDC4', border: 'border-cream-100', borderStyle: '#F5F3F0' },
+  lavender:  { bg: 'bg-terracotta-50', bgStyle: '#FDF5F2', icon: 'text-lavender-300', iconStyle: '#B8A4D4', border: 'border-cream-100', borderStyle: '#F5F3F0' },
 };
 
 export function FeaturesSection() {
   return (
-    <section className="px-4 py-20 sm:px-6 lg:px-8">
+    <section className="px-4 py-20 sm:px-6 lg:px-8" style={{backgroundColor: '#FAF8F5'}}>
       <div className="mx-auto max-w-6xl">
         {/* Section header */}
         <div className="mx-auto max-w-2xl text-center mb-14">
-          <p className="text-sm font-bold uppercase tracking-widest text-indigo-600 mb-3">
+          <p className="text-sm font-bold uppercase tracking-widest mb-3 text-coral-500" style={{color: '#FF6B5A'}}>
             Features
           </p>
-          <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+          <h2 className="text-3xl font-extrabold sm:text-4xl text-charcoal-900" style={{color: '#2C2825'}}>
             Everything your volunteer team needs,{' '}
             <span className="text-gradient">nothing it doesn't</span>
           </h2>
-          <p className="mt-4 text-lg text-gray-500">
+          <p className="mt-4 text-lg text-warm-gray-600" style={{color: '#8B8480'}}>
             Purpose-built tools that replace the spreadsheets, group chats, and
             sticky notes.
           </p>
@@ -74,15 +74,20 @@ export function FeaturesSection() {
             return (
               <div
                 key={f.title}
-                className={`hover-lift group rounded-2xl border ${c.border} bg-white p-7 animate-fade-in-up stagger-${i + 1}`}
+                className={`hover-lift group rounded-2xl border p-7 animate-fade-in-up stagger-${i + 1}`}
+                style={{
+                  backgroundColor: '#FAF8F5',
+                  borderColor: c.borderStyle || '#F5F3F0',
+                }}
               >
                 <div
-                  className={`mb-5 flex h-12 w-12 items-center justify-center rounded-xl ${c.bg} transition-transform group-hover:scale-110`}
+                  className={`mb-5 flex h-12 w-12 items-center justify-center rounded-xl transition-transform group-hover:scale-110`}
+                  style={{backgroundColor: c.bgStyle || '#FDF5F2'}}
                 >
-                  <f.icon className={`h-6 w-6 ${c.icon}`} />
+                  <f.icon className={`h-6 w-6`} style={{color: c.iconStyle}} strokeWidth={2.5} />
                 </div>
-                <h3 className="text-base font-bold text-gray-900">{f.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-gray-500">{f.desc}</p>
+                <h3 className="text-base font-bold text-charcoal-900" style={{color: '#2C2825'}}>{f.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-warm-gray-600" style={{color: '#8B8480'}}>{f.desc}</p>
               </div>
             );
           })}

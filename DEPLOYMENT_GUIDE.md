@@ -60,6 +60,7 @@ This will execute:
 - `005_create_notifications.sql` - Notifications system
 - `006_fix_groups_invite_code_default.sql` - Fix invite_code default
 - `007_reload_postgrest_schema.sql` - Reload PostgREST schema cache
+- `008_fix_group_members_rls_recursion.sql` - Fix 42P17 infinite recursion in RLS policies
 
 ### Step 5: Set Up Resend API Key Secret
 

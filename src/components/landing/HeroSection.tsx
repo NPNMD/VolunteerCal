@@ -6,26 +6,29 @@ export function HeroSection() {
   const { user } = useAuth();
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-indigo-600 via-purple-600 to-indigo-800 animate-gradient px-4 py-20 text-white sm:py-28 lg:py-36">
+    <section className="relative overflow-hidden bg-gradient-to-br from-coral-500 via-honey-500 to-terracotta-500 animate-gradient px-4 py-20 text-white sm:py-28 lg:py-36" style={{backgroundImage: 'linear-gradient(135deg, #FF6B5A 0%, #F4A261 50%, #D97757 100%)'}}>
       {/* Decorative floating elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
         <div className="animate-float absolute top-16 left-[10%] flex h-14 w-14 items-center justify-center rounded-2xl bg-white/10 backdrop-blur-sm">
-          <Calendar className="h-7 w-7 text-white/70" />
+          <Calendar className="h-7 w-7 text-white/80" strokeWidth={2.5} />
         </div>
         <div className="animate-float-delayed absolute top-32 right-[12%] flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 backdrop-blur-sm">
-          <Heart className="h-6 w-6 text-pink-300/70" />
+          <Heart className="h-6 w-6 text-yellow-400/80" strokeWidth={2.5} />
         </div>
         <div className="animate-float-slow absolute bottom-24 left-[18%] flex h-10 w-10 items-center justify-center rounded-2xl bg-white/10 backdrop-blur-sm">
-          <Users className="h-5 w-5 text-white/70" />
+          <Users className="h-5 w-5 text-white/80" strokeWidth={2.5} />
         </div>
-        {/* Subtle grid pattern */}
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMiIvPjwvZz48L2c+PC9zdmc+')] opacity-40" />
+        {/* Organic warm blob pattern instead of grid */}
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute top-20 right-10 h-64 w-64 rounded-full bg-white/10 blur-3xl" />
+          <div className="absolute bottom-20 left-10 h-80 w-80 rounded-full bg-white/10 blur-3xl" />
+        </div>
       </div>
 
       <div className="relative mx-auto max-w-4xl text-center">
         {/* Badge */}
         <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-medium backdrop-blur-sm animate-fade-in">
-          <span className="h-2 w-2 rounded-full bg-green-400 animate-pulse" />
+          <span className="h-2 w-2 rounded-full bg-sage-500 animate-pulse" style={{backgroundColor: '#7FB069'}} />
           100% Free &middot; No credit card required
         </div>
 
@@ -33,13 +36,13 @@ export function HeroSection() {
         <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl animate-fade-in-up">
           Rally Your Volunteers.
           <br />
-          <span className="bg-gradient-to-r from-amber-200 via-yellow-200 to-amber-200 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-400 bg-clip-text text-transparent" style={{backgroundImage: 'linear-gradient(to right, #FFB830, #FFCA5A, #FFB830)'}}>
             Amplify Your Impact.
           </span>
         </h1>
 
         {/* Subheadline */}
-        <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-indigo-100/90 sm:text-xl animate-fade-in-up stagger-1">
+        <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-white/90 sm:text-xl animate-fade-in-up stagger-1">
           Ditch the spreadsheets, group texts, and no-shows. VolunteerCal gives your
           organization a shared calendar where volunteers sign up, get reminded, and
           actually show up.
@@ -50,23 +53,25 @@ export function HeroSection() {
           {user ? (
             <Link
               to="/dashboard"
-              className="group inline-flex items-center gap-2 rounded-xl bg-white px-8 py-4 text-base font-bold text-indigo-600 shadow-xl shadow-indigo-900/20 transition-all hover:bg-indigo-50 hover:shadow-2xl active:scale-[0.98]"
+              className="group inline-flex items-center gap-2 rounded-2xl px-8 py-4 text-base font-bold shadow-xl transition-all hover:shadow-2xl active:scale-[0.98] bg-cream-50 text-charcoal-900" 
+              style={{backgroundColor: '#FAF8F5', color: '#2C2825', boxShadow: '0 10px 40px -10px rgba(217, 119, 87, 0.3)'}}
             >
               Go to Dashboard
-              <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+              <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" strokeWidth={2.5} />
             </Link>
           ) : (
             <>
               <Link
                 to="/register"
-                className="group inline-flex items-center gap-2 rounded-xl bg-white px-8 py-4 text-base font-bold text-indigo-600 shadow-xl shadow-indigo-900/20 transition-all hover:bg-indigo-50 hover:shadow-2xl animate-pulse-glow active:scale-[0.98]"
+                className="group inline-flex items-center gap-2 rounded-2xl px-8 py-4 text-base font-bold shadow-xl transition-all hover:shadow-2xl animate-pulse-glow active:scale-[0.98] bg-cream-50 text-charcoal-900"
+                style={{backgroundColor: '#FAF8F5', color: '#2C2825', boxShadow: '0 10px 40px -10px rgba(217, 119, 87, 0.3)'}}
               >
                 Get Started Free
-                <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+                <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" strokeWidth={2.5} />
               </Link>
               <Link
                 to="/login"
-                className="inline-flex items-center gap-2 rounded-xl border-2 border-white/30 px-8 py-4 text-base font-bold text-white transition-all hover:border-white/60 hover:bg-white/10 active:scale-[0.98]"
+                className="inline-flex items-center gap-2 rounded-2xl border-2 border-white/30 px-8 py-4 text-base font-bold text-white transition-all hover:border-white/60 hover:bg-white/10 active:scale-[0.98]"
               >
                 Sign In
               </Link>
@@ -76,7 +81,7 @@ export function HeroSection() {
 
         {/* Micro-copy */}
         {!user && (
-          <p className="mt-4 text-sm text-indigo-200/70 animate-fade-in-up stagger-3">
+          <p className="mt-4 text-sm text-white/80 animate-fade-in-up stagger-3">
             Set up your first group in under 2 minutes
           </p>
         )}

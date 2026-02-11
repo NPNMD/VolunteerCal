@@ -1,50 +1,56 @@
 import { supabase } from '@/config/supabase';
 import type { CalendarEvent, SearchFilters } from '@/types';
 
+async function enrichEventsWithRelations(events: CalendarEvent[]): Promise<CalendarEvent[]> {
+  if (events.length === 0) return events;
+  const groupIds = [...new Set(events.map((e) => e.group_id))];
+  const creatorIds = [...new Set(events.map((e) => e.created_by))];
+  const [groupsRes, profilesRes] = await Promise.all([
+    supabase.from('groups').select('id, name, category').in('id', groupIds),
+    supabase.from('profiles').select('id, full_name, avatar_url').in('id', creatorIds),
+  ]);
+  const groupMap = new Map((groupsRes.data || []).map((g) => [g.id, g]));
+  const profileMap = new Map((profilesRes.data || []).map((p) => [p.id, p]));
+  return events.map((e) => ({
+    ...e,
+    group: groupMap.get(e.group_id) ?? null,
+    creator: profileMap.get(e.created_by) ?? null,
+  }));
+}
+
 export const eventsService = {
   async getEventsByGroup(groupId: string): Promise<CalendarEvent[]> {
     const { data, error } = await supabase
       .from('events')
-      .select(`
-        *,
-        creator:profiles(id, full_name, avatar_url),
-        group:groups(id, name, category)
-      `)
+      .select('*')
       .eq('group_id', groupId)
       .neq('status', 'draft')
       .order('start_time', { ascending: true });
     if (error) throw error;
-    return (data || []) as unknown as CalendarEvent[];
+    return enrichEventsWithRelations((data || []) as unknown as CalendarEvent[]);
   },
 
   async getUpcomingEvents(): Promise<CalendarEvent[]> {
     const { data, error } = await supabase
       .from('events')
-      .select(`
-        *,
-        creator:profiles(id, full_name, avatar_url),
-        group:groups(id, name, category)
-      `)
+      .select('*')
       .eq('status', 'published')
       .gte('start_time', new Date().toISOString())
       .order('start_time', { ascending: true })
       .limit(20);
     if (error) throw error;
-    return (data || []) as unknown as CalendarEvent[];
+    return enrichEventsWithRelations((data || []) as unknown as CalendarEvent[]);
   },
 
   async getEvent(eventId: string): Promise<CalendarEvent> {
     const { data, error } = await supabase
       .from('events')
-      .select(`
-        *,
-        creator:profiles(id, full_name, avatar_url),
-        group:groups(id, name, category)
-      `)
+      .select('*')
       .eq('id', eventId)
       .single();
     if (error) throw error;
-    return data as unknown as CalendarEvent;
+    const [enriched] = await enrichEventsWithRelations([data as unknown as CalendarEvent]);
+    return enriched;
   },
 
   async createEvent(event: {
@@ -94,14 +100,7 @@ export const eventsService = {
   },
 
   async searchEvents(filters: Partial<SearchFilters>): Promise<CalendarEvent[]> {
-    let query = supabase
-      .from('events')
-      .select(`
-        *,
-        creator:profiles(id, full_name, avatar_url),
-        group:groups(id, name, category)
-      `)
-      .eq('status', 'published');
+    let query = supabase.from('events').select('*').eq('status', 'published');
 
     if (filters.query) {
       query = query.ilike('title', `%${filters.query}%`);
@@ -126,16 +125,13 @@ export const eventsService = {
 
     const { data, error } = await query;
     if (error) throw error;
-    return (data || []) as unknown as CalendarEvent[];
+    return enrichEventsWithRelations((data || []) as unknown as CalendarEvent[]);
   },
 
   async getCalendarEvents(startDate: string, endDate: string, groupIds?: string[]): Promise<CalendarEvent[]> {
     let query = supabase
       .from('events')
-      .select(`
-        *,
-        group:groups(id, name, category)
-      `)
+      .select('*')
       .eq('status', 'published')
       .gte('start_time', startDate)
       .lte('start_time', endDate);
@@ -146,6 +142,6 @@ export const eventsService = {
 
     const { data, error } = await query;
     if (error) throw error;
-    return (data || []) as unknown as CalendarEvent[];
+    return enrichEventsWithRelations((data || []) as unknown as CalendarEvent[]);
   },
 };
