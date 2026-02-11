@@ -21,8 +21,8 @@ export const signupsService = {
       const profileMap = new Map((profilesRes.data || []).map((p) => [p.id, p]));
       const depMap = new Map((depsRes.data || []).map((d) => [d.id, d]));
       signups.forEach((s) => {
-        (s as EventSignup & { profile?: unknown }).profile = profileMap.get(s.user_id) ?? null;
-        (s as EventSignup & { dependent?: unknown }).dependent = s.dependent_id ? depMap.get(s.dependent_id) ?? null : null;
+        (s as EventSignup & { profile?: unknown }).profile = (profileMap.get(s.user_id) ?? undefined) as EventSignup['profile'];
+        (s as EventSignup & { dependent?: unknown }).dependent = (s.dependent_id ? depMap.get(s.dependent_id) ?? undefined : undefined) as EventSignup['dependent'];
       });
     }
     return signups;
@@ -47,7 +47,7 @@ export const signupsService = {
       signups.forEach((s) => {
         const ev = eventMap.get(s.event_id);
         const grp = ev ? groupMap.get(ev.group_id) : null;
-        (s as EventSignup & { event?: unknown }).event = ev ? { ...ev, group: grp ?? null } : null;
+        (s as EventSignup & { event?: unknown }).event = ev ? { ...ev, group: (grp ?? undefined) as { id: string; name: string } | undefined } : undefined;
       });
     }
     return signups;

@@ -111,7 +111,7 @@ export const groupsService = {
         .in('id', members.map((m) => m.user_id));
       const profileMap = new Map((profiles || []).map((p) => [p.id, p]));
       members.forEach((m) => {
-        (m as GroupMember & { profile?: unknown }).profile = profileMap.get(m.user_id) ?? null;
+        (m as GroupMember & { profile?: unknown }).profile = (profileMap.get(m.user_id) ?? undefined) as GroupMember['profile'];
       });
     }
     return members;

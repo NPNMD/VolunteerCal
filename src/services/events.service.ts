@@ -13,8 +13,8 @@ async function enrichEventsWithRelations(events: CalendarEvent[]): Promise<Calen
   const profileMap = new Map((profilesRes.data || []).map((p) => [p.id, p]));
   return events.map((e) => ({
     ...e,
-    group: groupMap.get(e.group_id) ?? null,
-    creator: profileMap.get(e.created_by) ?? null,
+    group: (groupMap.get(e.group_id) ?? undefined) as CalendarEvent['group'],
+    creator: (profileMap.get(e.created_by) ?? undefined) as CalendarEvent['creator'],
   }));
 }
 
