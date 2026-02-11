@@ -69,6 +69,22 @@
 
 ---
 
+## Phase 6: Landing Page & Marketing
+
+**Goal:** Transform the landing page from a basic feature list into a persuasive marketing experience that converts visitors into users.
+
+- [x] Modular landing section components (`src/components/landing/`)
+- [x] HeroSection — Emotional headline, animated gradient, floating icons, trust badge, pulsing CTA
+- [x] SocialProofBar — Glassmorphism trust signals card (Instant Setup, Privacy First, 2-Min Onboarding, Built for Nonprofits)
+- [x] ProblemSection — "Sound familiar?" pain-point framing (Spreadsheet Chaos, Group Texts, No-Shows, Admin Burnout)
+- [x] HowItWorksSection — 3-step visual walkthrough (Create Group → Post Events → Volunteers Show Up)
+- [x] FeaturesSection — Color-coded 6-feature grid with hover-lift cards
+- [x] CTASection — Bold gradient CTA banner with pulsing button and free-forever copy
+- [x] Landing page CSS animations (fadeInUp, float, pulseGlow, gradientShift, hover-lift, glass-card)
+- [x] Barrel export index for landing components
+
+---
+
 ## Future
 
 Planned enhancements beyond the initial release:

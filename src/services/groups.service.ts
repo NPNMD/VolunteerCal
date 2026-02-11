@@ -1,6 +1,24 @@
 import { supabase } from '@/config/supabase';
 import type { Group, GroupMember } from '@/types';
 
+/** Translate Supabase/Postgres errors into user-friendly messages for group creation. */
+function translateGroupError(err: { code?: string; message?: string }): Error {
+  const code = err?.code ?? '';
+  const msg = err?.message ?? '';
+  if (code === '23503' || msg.includes('foreign key constraint')) {
+    return new Error(
+      'Your profile may not be set up yet. Please refresh the page, complete your profile, and try again.'
+    );
+  }
+  if (code === '42501' || msg.includes('row-level security') || msg.includes('policy')) {
+    return new Error('You do not have permission to create groups. Please sign in and try again.');
+  }
+  if (code === '23505' || msg.includes('unique constraint')) {
+    return new Error('A group with this name or invite code already exists. Please try a different name.');
+  }
+  return new Error(msg || 'Failed to create group. Please try again.');
+}
+
 export const groupsService = {
   async getGroups(userId: string): Promise<Group[]> {
     const { data, error } = await supabase
@@ -47,14 +65,15 @@ export const groupsService = {
       .insert(group)
       .select()
       .single();
-    if (error) throw error;
+    if (error) throw translateGroupError(error);
 
     // Auto-add creator as admin
-    await supabase.from('group_members').insert({
+    const { error: memberError } = await supabase.from('group_members').insert({
       group_id: data.id,
       user_id: group.created_by,
       role: 'admin',
     });
+    if (memberError) throw translateGroupError(memberError);
 
     return data as unknown as Group;
   },

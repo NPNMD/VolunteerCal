@@ -49,6 +49,7 @@ export function useGroups() {
 
   const createGroup = useCallback(async (group: Parameters<typeof groupsService.createGroup>[0]) => {
     setLoading(true);
+    setError(null);
     try {
       const data = await groupsService.createGroup(group);
       setGroups(prev => [...prev, data]);

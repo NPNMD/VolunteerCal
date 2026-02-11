@@ -7,7 +7,7 @@ import { GroupForm } from '@/components/groups/GroupForm';
 
 export function GroupsPage() {
   const { user } = useAuth();
-  const { groups, publicGroups, fetchGroups, fetchPublicGroups, createGroup, joinByInviteCode } = useGroups();
+  const { groups, publicGroups, error: groupsError, fetchGroups, fetchPublicGroups, createGroup, joinByInviteCode } = useGroups();
   const [showCreate, setShowCreate] = useState(false);
   const [showJoin, setShowJoin] = useState(false);
   const [inviteCode, setInviteCode] = useState('');
@@ -70,6 +70,7 @@ export function GroupsPage() {
         </div>
       )}
 
+      {groupsError && <div className="mb-4 rounded-lg bg-red-50 p-3 text-sm text-red-600">{groupsError}</div>}
       {showCreate && (
         <div className="mb-6 rounded-xl border border-gray-200 bg-white p-5">
           <h3 className="mb-4 font-semibold text-gray-900">Create New Group</h3>
