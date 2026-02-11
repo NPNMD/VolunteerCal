@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS public.groups (
   image_url TEXT,
   visibility TEXT NOT NULL DEFAULT 'public' CHECK (visibility IN ('public', 'private')),
   created_by UUID NOT NULL REFERENCES public.profiles(id) ON DELETE CASCADE,
-  invite_code TEXT UNIQUE DEFAULT encode(gen_random_bytes(6), 'hex'),
+  invite_code TEXT UNIQUE DEFAULT encode(extensions.gen_random_bytes(6), 'hex'),
   created_at TIMESTAMPTZ DEFAULT NOW(),
   updated_at TIMESTAMPTZ DEFAULT NOW()
 );
